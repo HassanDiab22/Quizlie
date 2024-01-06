@@ -71,12 +71,9 @@
 
     <!-- REQUIRED SCRIPTS -->
     <script>
-
+var count=0;
 function submitForm() {
-    // Create a FormData object to store form data
     var formData = new FormData($('#quizForm')[0]);
-    var count=0;
-    // Use AJAX to submit the form
     $.ajax({
         type: 'POST',
         url: 'addQuizAction.php',
@@ -84,7 +81,7 @@ function submitForm() {
         contentType: false,
         processData: false,
         success: function(response) {
-            console.log('quiz success');
+            console.log(count);
             count++;
             $.ajax({
             url: 'addQuestion.php', // Replace with the correct path to your createquiz.php file
@@ -105,6 +102,83 @@ function submitForm() {
             // Handle errors if needed
         }
     });
+}
+function submitQuestionForm() {
+    event.preventDefault();
+    
+    // Validate the form
+    if (validateForm2()) {
+        // Create a FormData object to store form data
+        var formData = new FormData($('#questionForm')[0]);
+
+        // Use AJAX to submit the form
+        $.ajax({
+            type: 'POST',
+            url: 'addQuestionAction.php',
+            data: formData ,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                console.log('question success '+count);
+                count++;
+                if(response=='done'){
+                    window.location.href ='index.php';
+                }
+                
+                $.ajax({
+                    url: 'addQuestion.php',
+                    type: 'GET',
+                    data: { count: count },
+                    success: function (response) {
+                        $('#card-body').html(response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error loading createquestion.php:', error);
+                    }
+                });
+            },
+            error: function (error) {
+                console.error('error', error);
+                // Handle errors if needed
+            }
+        });
+    }
+}
+
+
+function validateForm2() {
+    var isValid = true;
+    // Check your form fields for validation
+    // Example: Check if the title field is not empty
+    var title = $('#quiz_title').val();
+    var c1 = $('#choice_1').val();
+    var c2 = $('#choice_2').val();
+    var c3 = $('#choice_3').val();
+    var c4 = $('#choice_4').val();
+    
+    if (title.trim() === '') {
+        alert('Title cannot be empty.');
+        isValid = false;
+    }
+    if (c1.trim() === '' ) {
+        alert('Choice 1 cannot be empty.');
+        isValid = false;
+    }
+    if (c2.trim() === '' ) {
+        alert('Choice 2 cannot be empty.');
+        isValid = false;
+    }
+    if (c3.trim() === '' ) {
+        alert('Choice 3 cannot be empty.');
+        isValid = false;
+    }
+    if (c4.trim() === '' ) {
+        alert('Choice 4 cannot be empty.');
+        isValid = false;
+    }
+
+
+    return isValid;
 }
     $(document).ready(function () {
         // Make an AJAX GET request

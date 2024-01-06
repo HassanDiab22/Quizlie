@@ -1,6 +1,6 @@
-<form method="post" action="addQuestionAction.php" enctype="multipart/form-data">
+<form method="post" action="addQuestionAction.php" enctype="multipart/form-data" id="questionForm">
 <div class="card-header"><?php session_start();?>
-                <h3 class="card-title">Question number <?php echo $_SESSION['count']; ?></h3>
+                <h3 class="card-title">Question number <?php echo $_GET['count']; ?></h3>
 </div>
                 <div class="card-body" >
                   <div class="form-group">
@@ -28,12 +28,12 @@
                     <label for="right_choice">Correct Answer ✅</label>
                     <input type="number" class="form-control" id="choice_4" value="1" name="right_choice" max="4" min="1" required>
                   </div>
-                  <input type="number" name="count" value="<?php echo $_SESSION['count']; ?>" style="display:none">
+                  <input name="count" type="number" value="<?php echo $_GET['count']; ?>" style="display:none">
 
                 </div>
                 <!-- /.card-body -->
-
-                <div class="card-footer">
-                  <button type="submit" class="btn custom-btn btn-block" name="add_question"> &#x1F3C3; Lets move forward &#x1F3C3;</button>
-                </div>
+                
+                <button  class="btn custom-btn btn-block" name="add_question" onclick="submitQuestionForm()">
+                                           &#x1F3C3; Lets move forward &#x1F3C3;
+                    </button>
 </form>

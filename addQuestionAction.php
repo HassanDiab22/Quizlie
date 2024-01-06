@@ -7,10 +7,9 @@ if (isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"] == 1) {
     $quiz_id = $_SESSION["quiz_id"];
     $counter = $_SESSION["questions_number"];
 
-    if (isset($_POST['add_question'])) {
+
         // Retrieve form data
         $count = $_POST['count'];
-        echo 'the counter:' . $counter . ' and the count:' . $count;
         $question_title = mysqli_real_escape_string($con, $_POST['quiz_title']);
         $choice_1 = mysqli_real_escape_string($con, $_POST['choice_1']);
         $choice_2 = mysqli_real_escape_string($con, $_POST['choice_2']);
@@ -33,10 +32,12 @@ if (isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"] == 1) {
       
 
         if ($counter == $count) {
-            echo json_encode(["redirect" => "index.php"]);
+       
+           echo 'done';
+          
         }
-        $_SESSION['count']=$_SESSION['count']+1;
-    }
+       
+
 } else {
     // Redirect to the login page if not logged in
     header("Location: login.php");
