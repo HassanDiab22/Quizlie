@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <p class="card-text">'.$row['description'].'</p>';
           if(isset($_SESSION["LoggedIN"])){
             if($_SESSION["LoggedIN"]){
-              echo '<a href="quizattempt.php" class="btn custom-btn ">🎉 Take The Quiz 🎉 </a>';
+              echo '<a href="attemptPage.php?quizID='.$row['quiz_id'].'" class="btn custom-btn">🎉 Take The Quiz 🎉 </a>';
               }
           }else{
             echo '<a href="login.php" class="btn custom-btn ">👋Sign IN To Enjoy👋</a>';
