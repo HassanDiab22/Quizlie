@@ -1,5 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"] != 1) {
+    header("Location: login.php");
+}
+?>
 <form method="post" action="addQuestionAction.php" enctype="multipart/form-data" id="questionForm">
-<div class="card-header"><?php session_start();?>
+<div class="card-header">
                 <h3 class="card-title">Question number <?php echo $_GET['count']; ?></h3>
 </div>
                 <div class="card-body" >
@@ -26,7 +32,7 @@
 
                   <div class="form-group">
                     <label for="right_choice">Correct Answer ✅</label>
-                    <input type="number" class="form-control" id="choice_4" value="1" name="right_choice" max="4" min="1" required>
+                    <input type="number" class="form-control" id="right_choice" value="1" name="right_choice" max="4" min="1" required>
                   </div>
                   <input name="count" type="number" value="<?php echo $_GET['count']; ?>" style="display:none">
 

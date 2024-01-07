@@ -34,6 +34,11 @@ if (isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"] == 1) {
         if ($counter == $count) {
        
            echo 'done';
+           unset($_SESSION["quizTitle"]);
+           unset($_SESSION["quiz_id"]);
+           unset($_SESSION["questions_number"]);
+           unset($_SESSION["count"]);
+                   
           
         }
        

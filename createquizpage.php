@@ -6,11 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Create Quiz</title>
 </head>
+
 <body class="hold-transition layout-top-nav">
     <div class="wrapper">
 
         <!-- Navbar -->
         <?php include 'nav.php'?>
+        <?php
+              if (!isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"] != 1) {
+                  header("Location: login.php");
+              }
+            ?>
         <!-- /.navbar -->
 
         <!-- Content Wrapper. Contains page content -->
@@ -71,6 +77,7 @@
 
     <!-- REQUIRED SCRIPTS -->
     <script>
+   
 var count=0;
 function submitForm() {
     var formData = new FormData($('#quizForm')[0]);
@@ -81,6 +88,8 @@ function submitForm() {
         contentType: false,
         processData: false,
         success: function(response) {
+            
+            
             console.log(count);
             count++;
             $.ajax({
@@ -120,6 +129,7 @@ function submitQuestionForm() {
             processData: false,
             success: function (response) {
                 console.log('question success '+count);
+                            
                 count++;
                 if(response=='done'){
                     window.location.href ='index.php';
@@ -155,7 +165,8 @@ function validateForm2() {
     var c2 = $('#choice_2').val();
     var c3 = $('#choice_3').val();
     var c4 = $('#choice_4').val();
-    
+    var rc = $('#right_choice').val();
+    console.log(rc)
     if (title.trim() === '') {
         alert('Title cannot be empty.');
         isValid = false;
@@ -174,6 +185,10 @@ function validateForm2() {
     }
     if (c4.trim() === '' ) {
         alert('Choice 4 cannot be empty.');
+        isValid = false;
+    }
+    if (rc >4 || rc<0 ) {
+        alert('right choice should be between 1 & 4.');
         isValid = false;
     }
 

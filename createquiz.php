@@ -1,4 +1,9 @@
-
+<?php
+session_start();
+if (!isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"] != 1) {
+    header("Location: login.php");
+}
+?>
                                 <form method="post" action="addQuizAction.php" enctype="multipart/form-data" id="quizForm" >
                                     <div class="form-group">
                                         <label for="quiz_title">Quiz title 🧛‍♂️</label>

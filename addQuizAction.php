@@ -16,11 +16,17 @@ if(isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"] ){
     
         // Handle file upload
         $coverImagePath = "media/";
-        $coverImageExtension = pathinfo($_FILES['quiz_cover']['name'], PATHINFO_EXTENSION);
-        $coverImageName = time() . '_' . uniqid() . '.' . $coverImageExtension;
-        $coverImageTmpName = $_FILES['quiz_cover']['tmp_name'];
-    
-        move_uploaded_file($coverImageTmpName, $coverImagePath . $coverImageName);
+        var_dump($_FILES['quiz_cover']);
+        if(isset($_FILES['quiz_cover']['name']) && $_FILES['quiz_cover']['name'] !=""){
+            
+            $coverImageExtension = pathinfo($_FILES['quiz_cover']['name'], PATHINFO_EXTENSION);
+            $coverImageName = time() . '_' . uniqid() . '.' . $coverImageExtension;
+            $coverImageTmpName = $_FILES['quiz_cover']['tmp_name'];
+            move_uploaded_file($coverImageTmpName, $coverImagePath . $coverImageName);
+        }else{
+            $coverImageName='default.png';
+        }
+        
     
         // Check if essential values are not empty before executing the query
         if (!empty($quizTitle) && !empty($description) && $numberQuestions > 0) {

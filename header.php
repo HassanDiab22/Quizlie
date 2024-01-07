@@ -11,7 +11,10 @@
 <script src="static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="static/dist/js/adminlte.min.js"></script>
-
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="static/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- SweetAlert2 -->
+<script src="static/plugins/sweetalert2/sweetalert2.min.js"></script>
 <style>
     .custom-btn {
       background-color: transparent;

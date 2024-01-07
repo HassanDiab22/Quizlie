@@ -36,38 +36,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content">
     <div class="container">
   <div class="row">
-    <div class="col-md-4" style="height:100%">
+    <?php
+    $query = "SELECT * FROM quiz ";
+    $result = mysqli_query($con, $query);
+    while( $row = mysqli_fetch_array($result) ) {
+      $cover='';
+      if($row['cover']==''){
+        $cover='media/logo.png';
+      }else{
+        $cover=$row['cover'];
+      }
+      echo'<div class="col-md-4" style="height:100%">
       <div class="card" style="width: 18rem;height:100%">
-        <img class="card-img-top" src="..." alt="Card image cap">
+        <img class="card-img-top" src="'.$cover.'" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Card 1</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+          <h5 class="card-title">'.$row['title'].'</h5>
+          <p class="card-text">'.$row['description'].'</p>';
+          if(isset($_SESSION["LoggedIN"])){
+            if($_SESSION["LoggedIN"]){
+              echo '<a href="quizattempt.php" class="btn custom-btn ">🎉 Take The Quiz 🎉 </a>';
+              }
+          }else{
+            echo '<a href="login.php" class="btn custom-btn ">👋Sign IN To Enjoy👋</a>';
+          }
+          
+        echo '</div>
       </div>
-    </div>
+    </div>';
+    }
+    ?>
+    
 
-    <div class="col-md-4">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card 2</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card 3</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
+    
   </div>
 </div>
     </div>
