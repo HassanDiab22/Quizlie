@@ -7,9 +7,11 @@ if(isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"] ){
     $quizID = mysqli_real_escape_string($con, $_GET["quizID"]); 
     $query = "SELECT * FROM quiz WHERE quiz_id = $quizID";
     $result = mysqli_query($con, $query);
-    if (!$result || mysqli_num_rows($result) === 0) {
-        header("Location: notfound.php");
-    }
+    // if (!$result || mysqli_num_rows($result) === 0) {
+    //     echo 'hi';
+    //     header("Location: notfound.php");
+    // }
+    echo $quizID;
     $row = mysqli_fetch_assoc($result);
     
     $number_questions=$row['number_questions'];
@@ -20,10 +22,9 @@ if(isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"] ){
     
     // Store the quiz information in the session
     $_SESSION["attempt_id"] = $con->insert_id;;
-    $_SESSION["quiz_id"] = $lastQuizId;
-    $_SESSION["questions_number"] = $numberQuestions;
+    $_SESSION["quiz_id"] = $quizID;
     echo 'success man congrats';
-    header('Location: attemptQuestion.php/?attempt_id='.$attempt_id.'&question_number=1');
+    header('Location: attemptQuestionPage.php');
     } else {
     echo "Error: " . $sql . "<br>" . $con->error;
     }

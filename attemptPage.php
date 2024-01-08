@@ -4,7 +4,7 @@
     <?php include 'header.php';?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Create Quiz</title>
+    <title>Attempt</title>
 </head>
 
 <body class="hold-transition layout-top-nav">

@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="static/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- SweetAlert2 -->
 <script src="static/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="static/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <style>
     .custom-btn {
       background-color: transparent;
