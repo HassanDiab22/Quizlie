@@ -20,10 +20,18 @@ while ($row = mysqli_fetch_array($result)) {
 
 $current_question = $questions[$question_number - 1];
 $correct_answer = $current_question['correct_choice'];
+
 if($current_question['correct_choice']==$_POST['selected_choice']){
+    $q2="select * from quiz_attempt whereattempt_id = $quiz_attempt ;";
+    $result = $con->query($q2);
+
     
     $q = "UPDATE quiz_attempt SET score = score + 25 WHERE attempt_id = $quiz_attempt ;";
     $con->query($q);
+    if ($result) {
+        $quiz = $result->fetch_assoc();
+        echo $quiz['score'];
+    } 
 }
 function check($index,$choice, $correct_answer)
 {   
@@ -43,7 +51,7 @@ function check($index,$choice, $correct_answer)
 
 <form method="post"  enctype="multipart/form-data" id="questionForm">
     <div class="card-header">
-        <h3 class="card-title">Quedstion number <?php echo $_GET['question_number']; ?></h3>
+        <h3 class="card-title">Question number <?php echo $_GET['question_number']; ?></h3>
     </div>
     <div class="card-body">
         <div class="form-group">

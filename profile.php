@@ -23,6 +23,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     
     <!-- /.content-header -->
     <?php
+
+    if (!isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"]!=1) {
+      header("Location: login.php");
+    }
     $query1 = "SELECT * FROM user where user_id=".$_SESSION["UserId"];
     $query2 = "SELECT * FROM quiz where user_id=".$_SESSION["UserId"];
     $query3 = "SELECT COUNT(*) as attempt_count FROM quiz_attempt WHERE user_id = " . $_SESSION["UserId"];
@@ -160,14 +164,7 @@ while ($row = mysqli_fetch_array($result2)) {
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-      Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+  <?php include 'footer.php'; ?>
 </div>
 <!-- ./wrapper -->
 

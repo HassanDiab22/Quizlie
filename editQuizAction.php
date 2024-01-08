@@ -14,9 +14,9 @@ if (isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"]) {
     // Validate and sanitize the data
     $quiz_id = htmlspecialchars(trim($quiz_id));
     $quizTitle = htmlspecialchars(trim($quizTitle));
+    $description = preg_replace("/(?<!\\\\)'/", "it", $description);
     $description = htmlspecialchars(trim($description));
     $description = preg_replace("/(?<!\\\\)'/", "it", $description);
-    // Handle file upload
     $coverImagePath = "media/";
     if (isset($_FILES['quiz_cover']['name']) && $_FILES['quiz_cover']['name'] != "") {
         $coverImageExtension = pathinfo($_FILES['quiz_cover']['name'], PATHINFO_EXTENSION);

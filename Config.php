@@ -2,7 +2,7 @@
 define("SERVER_NAME", "localhost");
 define("USERNAME", "root");
 define("PASSWORD","");
-define("DATABASE","quizliedb");
+define("DATABASE","test2");
 
 $con = mysqli_connect(SERVER_NAME, USERNAME, PASSWORD, DATABASE);
 

@@ -41,7 +41,7 @@ $current_question=$questions[$question_number-1];
         </div>
 
         <div class="form-group icheck-amethyst d-inline">
-            <input type="radio" id="choice_1" name="choices" value="c1" required>
+            <input type="radio" id="choice_1" name="choices" value="1" required>
             <label for="choice_1"><?php echo $current_question['choice1'] ?></label>
         </div>
         <br>

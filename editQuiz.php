@@ -97,9 +97,10 @@ if (isset($_GET["quizID"])) {
 
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary col-12 custom-btn" name="edit">🏃‍♂️ Lets Keep Going 🏃‍♂️</button>
+                                <button type="submit" class="btn btn-primary col-12 custom-btn" name="edit">⭐ Update ⭐</button>
                             </div>
                         </form>
+                        <a href="retriveQuestions.php?quizID=<?php echo $quizID; ?>"><button  class="btn btn-primary col-12 custom-btn" name="edit"> 🤔 Edit Question  🤔</button></a>
                     </div>
                     <!-- /.card-body -->
                 </div>
