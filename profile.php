@@ -18,18 +18,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.navbar -->
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper " >
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0"> 📝Recent Quizliez📝 </h1>
-          </div><!-- /.col -->
-          
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
+    
     <!-- /.content-header -->
     <?php
     $query1 = "SELECT * FROM user where user_id=".$_SESSION["UserId"];
@@ -78,8 +69,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     $profilepic=profileGetter($score);
     ?>
     <!-- Main content -->
-    <div class="content">
-    <div class="container">
+    <div class="content pt-1" >
+    <div class="container" style="background-color: ;">
   <div class="row">
         <div class="col-md-12">
             <!-- Widget: user widget style 1 -->
@@ -125,28 +116,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- /.widget-user -->
         </div> 
-    <?php
-    $query = "SELECT * FROM quiz ";
-    $result = mysqli_query($con, $query);
-    while( $row = mysqli_fetch_array($result) ) {
-      $cover='';
-      if($row['cover']==''){
-        $cover='media/logo.png';
-      }else{
-        $cover=$row['cover'];
-      }
-      echo'<div class="col-md-4" style="height:100%">
-      <div class="card" style="width: 100%;height:100%">
-        <img class="card-img-top" src="'.$cover.'" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">'.$row['title'].'</h5>
-          <p class="card-text">'.$row['description'].'</p>
-          <a href="#" class="btn btn-primary">Take The Quiz</a>
-        </div>
-      </div>
-    </div>';
+        <?php
+$query2 = "SELECT * FROM quiz WHERE user_id=" . $_SESSION["UserId"];
+$result2 = mysqli_query($con, $query2);
+
+while ($row = mysqli_fetch_array($result2)) {
+    $cover = ($row['cover'] == '') ? 'media/logo.png' : $row['cover'];
+    
+    echo '<div class="col-md-4" style="height:100%">
+        <div class="card" style="width: 18rem;height:100%">
+            <img class="card-img-top" src="' . $cover . '" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">' . $row['title'] . '</h5>
+                <p class="card-text">' . $row['description'] . '</p>';
+
+    if (isset($_SESSION["LoggedIN"]) && $_SESSION["LoggedIN"]) {
+        echo '<a href="attemptPage.php?quizID=' . $row['quiz_id'] . '" class="btn custom-btn col-12 ">🎉 Take The Quiz 🎉</a>
+            <a href="editQuiz.php?quizID=' . $row['quiz_id'] . '" class="btn custom-btn col-12 mt-2">&#9999; Edit Quiz &#9999;</a>
+            <a href="deleteQuiz.php?quizID=' . $row['quiz_id'] . '" class="btn custom-btn col-12 mt-2" onclick="return confirm(\'Are you sure you want to delete this quiz?\')">&#128465; Delete Quiz &#128465</a>';
+    } else {
+        echo '<a href="login.php" class="btn custom-btn">👋 Sign IN To Enjoy 👋</a>';
     }
-    ?>
+
+    echo '</div>
+        </div>
+    </div>';
+}
+?>
+
     
 
   </div>
